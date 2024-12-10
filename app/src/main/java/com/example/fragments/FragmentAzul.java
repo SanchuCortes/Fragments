@@ -7,14 +7,13 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link BlankFragment#newInstance} factory method to
+ * Use the {@link FragmentAzul#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class BlankFragment extends Fragment {
+public class FragmentAzul extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -25,7 +24,7 @@ public class BlankFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public BlankFragment() {
+    public FragmentAzul() {
         // Required empty public constructor
     }
 
@@ -35,11 +34,11 @@ public class BlankFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment BlankFragment.
+     * @return A new instance of fragment FragmentAzul.
      */
     // TODO: Rename and change types and number of parameters
-    public static BlankFragment newInstance(String param1, String param2) {
-        BlankFragment fragment = new BlankFragment();
+    public static FragmentAzul newInstance(String param1, String param2) {
+        FragmentAzul fragment = new FragmentAzul();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -59,15 +58,7 @@ public class BlankFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_blank,container,false);
-
-
-        Bundle args = getArguments();
-        if (args != null){
-            String texto = args.getString("inputText");
-            TextView textView = view.findViewById(R.id.textView2);
-            textView.setText(texto);
-        }
-        return view;
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_azul, container, false);
     }
 }

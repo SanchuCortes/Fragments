@@ -1,12 +1,14 @@
 package com.example.fragments;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -14,6 +16,9 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,24 +32,23 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigation);
 
-        EditText et = findViewById(R.id.editTextText);
-        Button btn = findViewById(R.id.button);
-
-
-        btn.setOnClickListener(new View.OnClickListener() {
+        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
-            public void onClick(View view) {
-              String textoEntrada = et.getText().toString();
-              Bundle bundle = new Bundle();
-              bundle.putString("inputText",textoEntrada);
-
-              BlankFragment blankFragment = new BlankFragment();
-              blankFragment.setArguments(bundle);
-              FragmentManager fragmentManager = getSupportFragmentManager();
-              FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-              fragmentTransaction.add(R.id.fragmentContainerView,BlankFragment.class,bundle).commit();
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {  //Creamos unos if usando el metodo creado para cargar el fragmento dependiendo del boton pulsado
+                if(item.getItemId() == R.id.btnRojo){
+                    CargaFragmento(new FragmentRojo());
+                } else if (item.getItemId() == R.id.btnAzul) {
+                    CargaFragmento(new FragmentAzul());
+                }else if (item.getItemId() == R.id.btnVerde) {
+                    CargaFragmento(new FragmentVerde());
+                }
+                return true;
             }
         });
+    }
+    private void CargaFragmento(Fragment fragment){
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerView,fragment).commit();  //Metodo para cargar el fragment dependiendo del cual le mandemos
     }
 }
